@@ -20,7 +20,7 @@ docker run -d \
   -p 7860:7860 \
   -e ROOT_PASSWD=123456 \
   -e MODELSCOPE_API_KEY=your_api_key_here \
-  openclaw_computer:latest
+  tunmax/openclaw_computer:latest
 ```
 
 ## 环境变量配置
