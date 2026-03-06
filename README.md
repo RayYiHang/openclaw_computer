@@ -1,6 +1,6 @@
 # openclaw_computer
 
-一个预装 OpenClaw 并具有桌面环境的 Linux 容器，适配 ModelScope、HuggingFace 等免费容器部署服务，通过浏览器即可畅玩体验 OpenClaw
+一个预装 OpenClaw 并具有桌面环境的 Linux 容器，适配 ModelScope、HuggingFace 等免费容器部署服务，通过浏览器即可在安全环境下畅玩体验 OpenClaw
 
 ## 通过本项目，你将获得：
 - 💻 一台硬件配置至少为2核/16GB内存的 Linux 云电脑（由 ModelScope/HuggingFace 免费提供）
@@ -9,7 +9,7 @@
 
 ## 运行容器（ModelScope/HuggingFace Spaces）
 
-在 Spaces 文件目录下添加 Dockerfile 文件，内容和本仓库中的 Dockerfile 文件保持一致，然后在“设置”中添加 `ROOT_PASSWD` 和 `MODELSCOPE_API_KEY` 两个环境变量，最后点击重启容器即可开始部署。
+在 Spaces 仓库目录下添加 Dockerfile 文件，内容和本仓库中的 Dockerfile 文件保持一致，然后在“设置”中添加 `ROOT_PASSWD` 和 `MODELSCOPE_API_KEY` 两个环境变量，最后点击重启容器即可开始部署。
 
 ModelScope API 密钥获取教程参见：[https://modelscope.cn/docs/accounts/token](https://modelscope.cn/docs/accounts/token)
 
