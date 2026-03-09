@@ -38,7 +38,8 @@ docker run -d \
 
 ## 更新日志
 #### 2026-03-08
-1. 现已支持 ModelScope 容器在休眠/重启（含深度重启）后自动恢复 OpenClaw 的配置信息（目录：/root/.openclaw）,不用担心重启后配置可能丢失的问题。同时，以下目录及文件也会自动恢复：桌面目录（/root/Desktop）、ssh 公钥目录（/root/.ssh）、zsh 历史记录文件（/root/.zsh_history）
+1. 现已支持 ModelScope 容器在休眠/重启（含深度重启）后自动恢复 OpenClaw 的配置信息（目录：/root/.openclaw）,不用担心重启后配置可能丢失的问题。同时，以下目录及文件也会自动恢复：桌面目录（/root/Desktop）、ssh 公钥目录（/root/.ssh）、zsh 历史记录文件（/root/.zsh_history）  
+**实现原理**：系统会利用 `inotifywait` 命令实时监控上述文件夹及文件的变化，当发生变化时，会立即使用 `rsync` 命令将最新版本的文件同步到 ModelScope 的 `/mnt/workspace` 持久化储存路径下；而在系统刚启动时，会检查 `/mnt/workspace` 目录下是否存在可恢复的文件夹及文件，如果存在则会执行恢复操作，恢复完成后才会启动 openclaw gateway。
 2. OpenClaw 升级到最新的 2026.3.7 版本
 3. 压缩减小了镜像体积
 
