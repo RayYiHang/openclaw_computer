@@ -1,14 +1,12 @@
 # openclaw_computer
 
-一个预装 OpenClaw 并具有桌面环境的 Linux 容器，适配 ModelScope、HuggingFace 等免费容器部署服务，通过浏览器即可在安全环境下畅玩体验 OpenClaw
+一个预装 OpenClaw 并具有桌面环境的 Linux 容器，适配 ModelScope、HuggingFace 等免费容器部署服务，通过浏览器即可在安全的隔离环境下畅玩体验 OpenClaw
 
 ## 通过本项目，你将获得：
-- 💻 一台硬件配置至少为2核/16GB内存的 Linux 云电脑，硬件由 ModelScope/HuggingFace 免费提供
+- 💻 一台硬件配置至少为2核/16GB内存的 Linux 云电脑，硬件由 ModelScope/HuggingFace 社区提供
 - ✨ 具有类 Windows 桌面的系统操作环境，预装 Chrome 浏览器 / 中文拼音输入法，轻松易上手
 - 🚀 开箱即用的 OpenClaw，默认配置 ModelScope 免费模型推理后端，提供密钥即可畅玩
-
-## 重要提醒
-使用本容器时，请勿部署内网穿透相关服务，根据有关反馈和真实案例，HuggingFace Spaces 具备检测容器内是否运行内网穿透服务的能力，一旦检测到此类情况，容器将会被立即删除，相关账号也会面临被封禁的风险。对于 ModelScope Spaces 也请勿运行内网穿透相关服务。本容器仅用于 OpenClaw 的体验。
+- 🧪 在安全的隔离环境中尽情体验 OpenClaw
 
 ## 运行容器（ModelScope/HuggingFace Spaces）
 
@@ -16,7 +14,10 @@
 
 ModelScope API 密钥获取教程参见：[https://modelscope.cn/docs/accounts/token](https://modelscope.cn/docs/accounts/token)
 
-## 运行容器（本地）
+### ！！！重要提醒
+使用本容器时，请勿部署内网穿透相关服务，根据有关反馈和真实案例，HuggingFace Spaces 具备检测容器内是否运行内网穿透服务的能力，一旦检测到此类情况，容器将会被立即删除，相关账号也会面临被封禁的风险。对于 ModelScope Spaces 也请勿运行内网穿透相关服务。本容器仅用于 OpenClaw 的体验。
+
+## 运行容器（本地环境）
 
 ```bash
 docker run -d \
@@ -34,11 +35,15 @@ docker run -d \
 | `MODELSCOPE_API_KEY` | 否 | `not_set_yet` | ModelScope API 密钥，用于 OpenClaw 模型服务，未设置时其将无法正常工作 |
 
 
-## 帮助信息
+## 使用技巧
 
 - 支持自定义启动脚本（目前仅限 ModelScope），相关代码需写在 `/root/bz-startup/main.sh` 文件中
 - 按 `Ctrl+Shift` 组合键切换中英文输入法
 - 启动后屏幕左侧工具栏可调出剪贴板，可在上面输入或粘贴文字，然后在容器内可以直接粘贴
+
+## FAQ
+1. 为什么有时候 ModelScope 的创空间使用起来非常卡？  
+根据近期的观察，早上时段流畅，晚上时段则易卡顿。因为 ModelScope/HuggingFace 提供的免费 2核16GB 配置硬件是没有 SLA 协议的，即服务级别协议（Service Level Agreement，一般商业付费服务才有，内容主要包括硬件可用性、网络响应性以及发生故障时的修复时限等内容）。ModelScope 提供免费层级的配置应该是根据阿里云闲置资源的实际情况来提供，当高峰期时闲置资源少，就会变卡，低峰期闲置资源多，所以流畅。使用 ModelScope/HuggingFace 付费硬件配置时，因为有 SLA 协议，所以应该是一直流畅的。
 
 ## 更新日志
 
@@ -46,7 +51,7 @@ docker run -d \
 
 #### 2026-03-08
 1. 现已支持 ModelScope 容器在休眠/重启（含深度重启）后自动恢复 OpenClaw 的配置信息（目录：/root/.openclaw）,不用担心重启后配置可能丢失的问题。同时，以下目录及文件也会自动恢复：桌面目录（/root/Desktop）、zsh 历史记录文件（/root/.zsh_history）  
-**实现原理**：系统会利用 `inotifywait` 命令实时监控上述文件夹及文件的变化，当发生变化时，会立即使用 `rsync` 命令将最新版本的文件同步到 ModelScope 的 `/mnt/workspace` 持久化储存路径下；而在系统刚启动时，会检查 `/mnt/workspace` 目录下是否存在可恢复的文件夹及文件，如果存在则会执行恢复操作，恢复完成后才会启动 openclaw gateway。
+**实现原理**：系统会利用 `inotifywait` 命令实时监控上述文件夹及文件的变化，当发生变化时，会立即使用 `rsync` 命令将最新版本的文件同步到 ModelScope 的 `/mnt/workspace` 持久化储存路径下；而在系统刚启动时，会检查 `/mnt/workspace` 目录下是否存在可恢复的文件夹及文件，如果存在则会执行恢复操作，恢复完成后才会启动 openclaw gateway
 2. OpenClaw 升级到最新的 2026.3.7 版本
 3. 压缩减小了镜像体积
 
@@ -56,8 +61,13 @@ docker run -d \
 3. 进一步压缩减小了镜像体积
 
 #### 2026-03-10
-1. 新增支持自定义启动脚本，便于在容器休眠/重启后自动恢复指定进程，相关脚本代码需写在 `/root/bz-startup/main.sh` 文件中。
+1. 新增支持自定义启动脚本，便于在容器休眠/重启后自动恢复指定进程，相关脚本代码需写在 `/root/bz-startup/main.sh` 文件中
 2. 新增支持 ModelScope 容器自动实时备份/重启后自动恢复的路径：`/root/bz-startup`, `/root/.codex`, `/root/.claude`
-3. 修复 ModelScope 用户名称加上创空间英文名称长度超过27个字符时可能导致 OpenClaw 启动失败的问题。
+3. 修复 ModelScope 用户名称加上创空间英文名称长度超过27个字符时可能导致 OpenClaw 启动失败的问题
+
+#### 2026-03-11
+1. 降低 OpenClaw 在执行自我重启操作时的失败概率
+2. 解决深度重启创空间后，浏览器可能无法正常连接 openclaw web-ui，需手动在网关 url 后面添加 `&token=xxx` 的问题
+3. Chrome 浏览器升级至最新的 146 版本
 
 Made with ❤️ by 百泽匠人
