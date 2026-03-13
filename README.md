@@ -24,8 +24,9 @@ docker run -d \
   -p 7860:7860 \
   -e ROOT_PASSWD=123456 \
   -e MODELSCOPE_API_KEY=your_api_key_here \
-  tunmax/openclaw_computer:latest
+  ghcr.io/tunmax/openclaw_computer:latest
 ```
+2026-03-13：新增 copaw 版本，docker 镜像使用 ghcr.io/tunmax/openclaw_computer:copaw_latest
 
 ## 环境变量配置
 
@@ -73,5 +74,9 @@ docker run -d \
 #### 2026-03-12
 1. 解决手动点击网页文件时，Chrome 浏览器无法正常调起的问题
 2. 优化 noVNC 视窗显示，默认自动缩放系统画面至用户浏览器视窗大小
+
+#### 2026-03-13
+1. OpenClaw 升级到最新的 2026.3.12 版本
+2. 新增 copaw_computer 版本，docker 镜像使用 ghcr.io/tunmax/openclaw_computer:copaw_latest
 
 Made with ❤️ by 百泽匠人
