@@ -11,7 +11,12 @@
 
 ## 运行容器（ModelScope/HuggingFace Spaces）
 
-在 Spaces 仓库目录下添加 Dockerfile 文件，内容和本仓库中的文件一致，然后在“设置”中添加 `ROOT_PASSWD` 和 `MODELSCOPE_API_KEY` 两个环境变量，最后点击重启容器即可开始部署。
+ModelScope 部署教程：
+- [📝 文字版（点击查看）](https://mp.weixin.qq.com/s/gAQs3Zl9ohkcSFmQcd-Z-Q)
+- [🎬 视频版（点击查看）](https://www.bilibili.com/video/BV1HQwtzuEmw)
+
+HuggingFace 部署教程：
+- 在 Spaces 仓库目录下添加 Dockerfile 文件，内容和本仓库中的文件一致，然后在“设置”中添加 `ROOT_PASSWD` 和 `MODELSCOPE_API_KEY` 两个环境变量，最后点击重启容器即可开始部署。
 
 ### ！！！重要提醒
 使用本容器时，请勿部署内网穿透相关服务，根据有关反馈和真实案例，HuggingFace Spaces 具备检测容器内是否运行内网穿透服务的能力，一旦检测到此类情况，容器将会被立即删除，相关账号也会面临被封禁的风险。对于 ModelScope Spaces 也请勿运行内网穿透相关服务。本容器仅用于 OpenClaw 的体验。
