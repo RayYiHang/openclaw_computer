@@ -17,6 +17,7 @@
 
 #### HuggingFace 部署教程：
 - 在 Spaces 仓库目录下添加 Dockerfile 文件，内容和本仓库中的文件一致，然后在“设置”中添加 `ROOT_PASSWD` 和 `MODELSCOPE_API_KEY` 两个环境变量，最后点击重启容器即可开始部署。
+- 将 Bucket 挂载在 `/mnt/workspace` 路径下可激活本地自动备份/恢复特性
 - > 📌 注意：HuggingFace 好像已不允许在免费硬件（CPU basic, 2vCPU 16GB RAM）的容器上部署 OpenClaw，当检测到容器内存在 OpenClaw 进程时会自动暂停容器，也无法重新启动容器（会出现 503 错误），预计需要切换至付费硬件（CPU upgrade, 8 vCPU 32GB RAM）才能继续使用。  
   > 目前 CoPaw 版镜像依然可以在 HF 的免费容器上部署，将 Dockerfile 的首行代码改为 `FROM ghcr.io/tunmax/openclaw_computer:copaw_latest` 即可
 
@@ -33,7 +34,8 @@ docker run -d \
   ghcr.io/tunmax/openclaw_computer:latest
 ```
 - 激活自动备份/恢复特性：`docker run ... -v ./backups:/mnt/workspace ...`
-- 使用 CoPaw 版本：`docker run ... ghcr.io/tunmax/openclaw_computer:copaw_latest`
+- **使用 CoPaw 版本**：`docker run ... ghcr.io/tunmax/openclaw_computer:copaw_latest`
+- **使用 Hermes 版本**：`docker run ... ghcr.io/tunmax/openclaw_computer:hermes_latest`
 
 ## 容器特性介绍
 1. 容器支持自动备份/恢复 OpenClaw 配置及部分预定义文件夹，具体包括：OpenClaw 配置目录（`/root/.openclaw`）、电脑桌面目录（`/root/Desktop`）、Codex 配置目录（`/root/.codex`）、Claude Code 配置目录（`/root/.claude`）、用户自定义启动脚本目录（`/root/bz-startup`）、zsh 历史记录文件（`/root/.zsh_history`）
@@ -111,6 +113,11 @@ docker run -d \
 ## 更新日志
 
 **升级操作说明**：ModelScope 已经部署容器的用户，需要在创空间“设置”处点击“深度重启”，然后才会自动拉取最新的容器镜像并部署。
+
+#### 2026-04-12
+1. 新增 Hermes 镜像版本，docker tag 标识为 `hermes_latest`
+2. OpenClaw 升级至最新 2026.4.11 版本
+3. CoPaw 版：同步 OpenClaw 版 260411 的更新
 
 #### 2026-04-11
 1. OpenClaw 升级至最新 2026.4.10 版本
