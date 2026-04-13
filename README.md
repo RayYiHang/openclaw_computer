@@ -14,12 +14,19 @@
 #### ModelScope 部署教程：
 - [📝 文字版（点击查看）](https://mp.weixin.qq.com/s/gAQs3Zl9ohkcSFmQcd-Z-Q)
 - [🎬 视频版（点击查看）](https://www.bilibili.com/video/BV1HQwtzuEmw)
+- 使用 **QwenPaw 版镜像** 教程：
+    1. 参照上述文字/视频教程完成部署
+    2. 部署后，编辑“空间文件”下的`Dockerfile`文件，将首行代码`FROM ghcr.io/tunmax/openclaw_computer:latest`修改为`FROM ghcr.io/tunmax/openclaw_computer:qwenpaw_latest`，然后在页面底部点击“提交修改”
+    3. 最后，在“设置”中点击“深度重启”即可
+- 使用 **Hermes 版镜像** 教程：
+    1. 操作同 **QwenPaw 版镜像** 教程，仅需将`Dockerfile`文件首行最后的`:latest`改为`:hermes_latest`
+
 
 #### HuggingFace 部署教程：
 - 在 Spaces 仓库目录下添加 Dockerfile 文件，内容和本仓库中的文件一致，然后在“设置”中添加 `ROOT_PASSWD` 和 `MODELSCOPE_API_KEY` 两个环境变量，最后点击重启容器即可开始部署。
 - 将 Bucket 挂载在 `/mnt/workspace` 路径下可激活本地自动备份/恢复特性
 - > 📌 注意：HuggingFace 好像已不允许在免费硬件（CPU basic, 2vCPU 16GB RAM）的容器上部署 OpenClaw，当检测到容器内存在 OpenClaw 进程时会自动暂停容器，也无法重新启动容器（会出现 503 错误），预计需要切换至付费硬件（CPU upgrade, 8 vCPU 32GB RAM）才能继续使用。  
-  > 目前 CoPaw 版镜像依然可以在 HF 的免费容器上部署，将 Dockerfile 的首行代码改为 `FROM ghcr.io/tunmax/openclaw_computer:copaw_latest` 即可
+  > 目前 QwenPaw 版镜像依然可以在 HF 的免费容器上部署，将 Dockerfile 的首行代码改为 `FROM ghcr.io/tunmax/openclaw_computer:qwenpaw_latest` 即可
 
 #### ⚠️ 重要提醒
 在开源社区部署本容器时，请勿启动内网穿透相关服务，根据有关反馈和真实案例，HuggingFace Spaces 具备检测容器内是否运行内网穿透服务的能力，一旦检测到此类情况，容器将会被立即删除，相关账号也会面临被封禁的风险。对于 ModelScope Spaces 也请勿运行内网穿透相关服务。本容器仅用于 OpenClaw 的体验。
@@ -34,7 +41,7 @@ docker run -d \
   ghcr.io/tunmax/openclaw_computer:latest
 ```
 - 激活自动备份/恢复特性：`docker run ... -v ./backups:/mnt/workspace ...`
-- **使用 CoPaw 版本**：`docker run ... ghcr.io/tunmax/openclaw_computer:copaw_latest`
+- **使用 QwenPaw 版本**：`docker run ... ghcr.io/tunmax/openclaw_computer:qwenpaw_latest`
 - **使用 Hermes 版本**：`docker run ... ghcr.io/tunmax/openclaw_computer:hermes_latest`
 
 ## 容器特性介绍
@@ -113,6 +120,9 @@ docker run -d \
 ## 更新日志
 
 **升级操作说明**：ModelScope 已经部署容器的用户，需要在创空间“设置”处点击“深度重启”，然后才会自动拉取最新的容器镜像并部署。
+
+#### 2026-04-13
+1. 新增 QwenPaw 镜像版本，docker tag 标识为 `qwenpaw_latest`（备注：官方已将 CoPaw 正式更名为 QwenPaw）
 
 #### 2026-04-12
 1. 新增 Hermes 镜像版本，docker tag 标识为 `hermes_latest`
