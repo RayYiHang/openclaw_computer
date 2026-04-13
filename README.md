@@ -73,7 +73,7 @@ docker run -d \
 | `S3_BUCKET` | 否 | `无` | S3 远程存储的桶名 Bucket。当该值非空时，容器将启用 S3 远程存储的通用自动备份/恢复特性 |
 | `S3_KEY_ID` | 否 | `无` | S3 远程存储的 AccessKey ID |
 | `S3_ACCESS_KEY` | 否 | `无` | S3 远程存储的 AccessKey Secret |
-| `S3_ENDPOINT` | 否 | `https://s3.cstcloud.cn` | S3 远程存储的接入点 Endpoint，默认值是中国科技院[「数据胶囊」](https://data.cstcloud.cn)服务的 S3 协议接入点 |
+| `S3_ENDPOINT` | 否 | `https://s3.cstcloud.cn` | S3 远程存储的接入点 Endpoint，默认值是中国科技院[「数据胶囊」](https://data.cstcloud.cn)服务的 S3 协议接入点（相关链接：[获取中科院免费 20GB S3 云存储空间教程](https://mp.weixin.qq.com/s/JrR6hc07boc_rgP__cL4-w)） |
 | `S3_BACKUP_PATH` | 否 | `backups/data.tar.gz` | S3 远程存储的备份路径，设置不同备份路径可以区分备份版本，并选择从指定备份版本中恢复配置。例如，可设置：`backups/data_version_1.tar.gz`、`user1/data.tar.gz`、`user2/data.tar.gz` |
 | `BACKUP_ENC_PASS` | 否 | `无` | 备份文件加密密码，当该值被设置时，备份文件传输到远程网络存储前会先被加密，实现端到端加密（E2E）效果 |
 
