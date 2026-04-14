@@ -121,6 +121,9 @@ docker run -d \
 
 **升级操作说明**：ModelScope 已经部署容器的用户，需要在创空间“设置”处点击“深度重启”，然后才会自动拉取最新的容器镜像并部署。
 
+#### 2026-04-14
+1. Hermes 版镜像：升级至最新 0.9.0 版本
+
 #### 2026-04-13
 1. 新增 QwenPaw 镜像版本，docker tag 标识为 `qwenpaw_latest`（备注：官方已将 CoPaw 正式更名为 QwenPaw）
 2. 优化 Hermes 版镜像，自动备份时忽略 node_modules 文件夹
