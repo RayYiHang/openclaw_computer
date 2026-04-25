@@ -121,6 +121,20 @@ docker run -d \
 
 **升级操作说明**：ModelScope 已经部署容器的用户，需要在创空间“设置”处点击“深度重启”，然后才会自动拉取最新的容器镜像并部署。
 
+#### 2026-04-25
+原版镜像：
+1. OpenClaw 升级至最新 2026.4.23 版本
+2. 默认模型修改为 Qwen3.5-122B-A10B，以提供多模态输入支持
+
+QwenPaw 版镜像：
+1. 升级至最新 1.1.4.post1 版本
+2. 默认模型修改为 Qwen3.5-122B-A10B，以提供多模态输入支持
+
+Hermes 版镜像：
+1. 升级至最新 0.11.0 版本
+2. 默认模型修改为 Qwen3.5-122B-A10B，以提供多模态输入支持
+3. 修复魔搭社区深度重启拉取新镜像后，Hermes 功能升级不完整问题
+
 #### 2026-04-23
 1. OpenClaw 升级至最新 2026.4.21 版本
 2. Chrome 浏览器升级至最新 147.0.7727.116 版本
@@ -130,22 +144,22 @@ docker run -d \
 
 #### 2026-04-18
 1. OpenClaw 升级至最新 2026.4.15 版本
-2. QwenPaw 镜像版本：升级至最新 1.1.2 版本
+2. QwenPaw 版镜像：升级至最新 1.1.2 版本
 3. Hermes 版镜像：升级至最新 0.10.0 版本
 
 #### 2026-04-15
 1. OpenClaw 升级至最新 2026.4.14 版本
-2. QwenPaw 镜像版本：升级至最新 1.1.1 版本
+2. QwenPaw 版镜像：升级至最新 1.1.1 版本
 
 #### 2026-04-14
 1. Hermes 版镜像：升级至最新 0.9.0 版本
 
 #### 2026-04-13
-1. 新增 QwenPaw 镜像版本，docker tag 标识为 `qwenpaw_latest`（备注：官方已将 CoPaw 正式更名为 QwenPaw）
+1. 新增 QwenPaw 版镜像，docker tag 标识为 `qwenpaw_latest`（备注：官方已将 CoPaw 正式更名为 QwenPaw）
 2. 优化 Hermes 版镜像，自动备份时忽略 node_modules 文件夹
 
 #### 2026-04-12
-1. 新增 Hermes 镜像版本，docker tag 标识为 `hermes_latest`
+1. 新增 Hermes 版镜像，docker tag 标识为 `hermes_latest`
 2. OpenClaw 升级至最新 2026.4.11 版本
 3. CoPaw 版：同步 OpenClaw 版 260411 的更新
 
