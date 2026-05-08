@@ -16,7 +16,7 @@ docker run -d \
   -p 7860:7860 \
   -e ROOT_PASSWD=123456 \
   -e MODELSCOPE_API_KEY=your_api_key_here \
-  ghcr.io/tunmax/openclaw_computer:latest
+  ghcr.io/tunmax/openclaw_computer:latest /entrypoint.sh
 ```
 - 激活自动备份/恢复特性：`docker run ... -v ./backups:/mnt/workspace ...`
 - **使用 QwenPaw 版本**：`docker run ... ghcr.io/tunmax/openclaw_computer:qwenpaw_latest`
