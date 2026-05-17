@@ -38,9 +38,9 @@ docker run -d \
 #### HuggingFace 部署教程：
 1. 在 Spaces 仓库目录下添加 Dockerfile 文件，内容参考本仓库的 Dockerfile 文件，但首行代码需修改为 `FROM ghcr.io/tunmax/openclaw_computer:hf_edition`
 2. 在“设置”中点击“New secret”按钮创建 `MODELSCOPE_API_KEY` 环境变量，最后点击“Factory rebuild”按钮运行部署即可
-3. （可选）将 Bucket 挂载在 `/mnt/workspace` 路径下可激活本地自动备份/恢复特性
+3. （可选）将 Bucket 挂载在 `/mnt/workspace` 路径下可激活本地自动备份/恢复特性；设置环境变量 `PRO_MODE` 的值为 `1`，启动专业模式
 
-#### ⚠️ 重要提醒
+#### 💡 重要提醒
 在开源社区部署本容器时，请勿启动内网穿透相关服务，根据有关反馈和真实案例，HuggingFace Spaces 具备检测容器内是否运行内网穿透服务的能力，一旦检测到此类情况，容器将会被立即删除，相关账号也会面临被封禁的风险。对于 ModelScope Spaces 也请勿运行内网穿透相关服务。本容器仅用于 OpenClaw 的体验。
 
 ## 容器特性介绍
@@ -64,7 +64,8 @@ docker run -d \
 |--------|------|--------|------|
 | `VNC_PASSWD` | 否 | `无` | VNC连接密码，当该值被设置时，容器启动后需要输入此密码才能进入桌面 |
 | `SKIP_RESTORE` | 否 | `0` | 当该值设置为 `1` 时，容器将以纯净模式启动。在此模式下，容器启动时不会自动恢复 OpenClaw 历史配置、不会启用相关目录的自动备份功能以及停止执行用户自定义的启动脚本 |
-| `KEEP_ORIGINAL_CONF` | 否 | `1` | 容器启动时默认会复制一份镜像自带的 OpenClaw 配置至 `/root/.openclaw_origin` 路径下，便于在 OpenClaw 出现问题时切换回原版配置或与原版配置做对比定位问题。 |
+| `KEEP_ORIGINAL_CONF` | 否 | `1` | 容器启动时默认会复制一份镜像自带的 OpenClaw 配置至 `/root/.openclaw_origin` 路径下，便于在 OpenClaw 出现问题时切换回原版配置或与原版配置做对比定位问题 |
+| `PRO_MODE` | 否 | `0` | 该变量仅在 HuggingFace 专属镜像上可用。当该值设置为 `1` 时，容器会启动一个在线命令终端，方便在 OpenClaw 进程崩掉后进行排查和恢复，访问地址为：`https://<用户名-空间名>.hf.space/bzshell` |
 
 ### 通用自动备份/恢复配置
 #### S3 远程存储
@@ -120,6 +121,9 @@ docker run -d \
 ## 更新日志
 
 **升级操作说明**：ModelScope 已经部署容器的用户，需要在创空间“设置”处点击“深度重启”，然后才会自动拉取最新的容器镜像并部署。
+
+#### 2026-05-17
+1. HuggingFace 专属镜像新增专业模式，设置环境变量 `PRO_MODE` 为 `1` 时启用，该模式下会启动一个在线终端，访问地址为：`https://<你的空间真实url>/bzshell`
 
 #### 2026-05-16
 1. 新增在 HuggingFace 部署的专属镜像，docker tag 标识为 `hf_edition`
