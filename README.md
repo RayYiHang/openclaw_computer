@@ -122,6 +122,11 @@ docker run -d \
 
 **升级操作说明**：ModelScope 已经部署容器的用户，需要在创空间“设置”处点击“深度重启”，然后才会自动拉取最新的容器镜像并部署。
 
+#### 2026-05-21
+1. OpenClaw 升级至 2026.5.19 版本
+2. 删除 AGENTS.md/MEMORY.md 中关于规范 openclaw 重启行为的规则，目前 openclaw 自身已能完成优雅重启
+3. 修复 Konsole 终端执行 `openclaw doctor` 等命令时，内容有时会被截断无法完整显示的问题
+
 #### 2026-05-19
 1. OpenClaw 升级至 2026.5.18 版本
 2. 修复 HuggingFace 专属镜像在线终端发送 `Ctrl+C` 终止命令时无效的问题
