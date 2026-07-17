@@ -9,19 +9,6 @@
 - 🧪 在安全的隔离环境中尽情体验 OpenClaw
 - 🔄 OpenClaw 配置文件自动备份/恢复
 
-## 运行容器（本地环境）
-
-```bash
-docker run -d \
-  -p 7860:7860 \
-  -e ROOT_PASSWD=123456 \
-  -e MODELSCOPE_API_KEY=your_api_key_here \
-  ghcr.io/tunmax/openclaw_computer:latest /entrypoint.sh
-```
-- 激活自动备份/恢复特性：`docker run ... -v ./backups:/mnt/workspace ...`
-- 使用 QwenPaw 版本：`docker run ... ghcr.io/tunmax/openclaw_computer:qwenpaw_latest`
-- 使用 Hermes 版本：`docker run ... ghcr.io/tunmax/openclaw_computer:hermes_latest`
-
 ## 运行容器（ModelScope/HuggingFace Spaces）
 
 #### ModelScope 部署教程：
@@ -39,6 +26,19 @@ docker run -d \
 1. 在 Spaces 仓库目录下添加 Dockerfile 文件，内容参考本仓库的 Dockerfile 文件，但首行代码需修改为 `FROM ghcr.io/tunmax/openclaw_computer:hf_edition`
 2. 在“设置”中点击“New secret”按钮创建 `MODELSCOPE_API_KEY` 环境变量，最后点击“Factory rebuild”按钮运行部署即可
 3. （可选）将 Bucket 挂载在 `/mnt/workspace` 路径下可激活本地自动备份/恢复特性；设置环境变量 `PRO_MODE` 的值为 `1` 可启动专业模式，容器会额外启动在线终端和在线文件管理服务，方便排查问题
+
+## 运行容器（本地环境）
+
+```bash
+docker run -d \
+  -p 7860:7860 \
+  -e ROOT_PASSWD=123456 \
+  -e MODELSCOPE_API_KEY=your_api_key_here \
+  ghcr.io/tunmax/openclaw_computer:latest /entrypoint.sh
+```
+- 激活自动备份/恢复特性：`docker run ... -v ./backups:/mnt/workspace ...`
+- 使用 QwenPaw 版本：`docker run ... ghcr.io/tunmax/openclaw_computer:qwenpaw_latest`
+- 使用 Hermes 版本：`docker run ... ghcr.io/tunmax/openclaw_computer:hermes_latest`
 
 #### 💡 重要提醒
 在开源社区部署本容器时，请勿启动内网穿透相关服务，根据有关反馈和真实案例，HuggingFace Spaces 具备检测容器内是否运行内网穿透服务的能力，一旦检测到此类情况，容器将会被立即删除，相关账号也会面临被封禁的风险。对于 ModelScope Spaces 也请勿运行内网穿透相关服务。本容器仅用于 OpenClaw 的体验。
@@ -121,6 +121,9 @@ docker run -d \
 ## 更新日志
 
 **升级操作说明**：ModelScope 已经部署容器的用户，需要在创空间“设置”处点击“深度重启”，然后才会自动拉取最新的容器镜像并部署。
+
+#### 2026-07-17
+1. OpenClaw 升级至 2026.7.1 版本
 
 #### 2026-06-16
 1. OpenClaw 升级至 2026.6.6 版本
